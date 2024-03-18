@@ -1,0 +1,6 @@
+﻿  main.cpp
+E:\College\OneDrive\7th\겜서버\Project1\Project1\main.cpp(46,15): warning C4311: 'reinterpret_cast': 'WPARAM *'에서 'int'(으)로 포인터가 잘립니다.
+E:\College\OneDrive\7th\겜서버\Project1\Project1\main.cpp(46,15): warning C4302: 'reinterpret_cast': 'WPARAM *'에서 'int'(으)로 잘립니다.
+  Project1.vcxproj -> E:\College\OneDrive\7th\겜서버\Project1\x64\Debug\Server.exe
+  'pwsh.exe'은(는) 내부 또는 외부 명령, 실행할 수 있는 프로그램, 또는
+  배치 파일이 아닙니다.
