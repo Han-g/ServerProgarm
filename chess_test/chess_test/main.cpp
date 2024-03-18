@@ -1,9 +1,11 @@
 #define WIN32_LEAN_AND_MEAN
+#define _CRT_SECURE_NO_WARNINGS
 #include <windows.h>
 #include <WinSock2.h>
 #include <iostream>
 #include <tchar.h>
 #include <WS2tcpip.h>
+#include <regex>
 
 #include "resource.h"
 
@@ -12,6 +14,7 @@
 const		char*	SERVER_ADDR = "127.0.0.1";
 constexpr	short	SERVER_PORT = 4000;
 const		int		BUFSIZE = 256;
+std::string IP_addr;
 
 HINSTANCE g_hInst;
 LPCTSTR lpszClass = L"Test Client";
@@ -101,11 +104,12 @@ void print_error(const char* msg, int err_no) {
 		MAKELANGID(LANG_NEPALI, SUBLANG_DEFAULT), reinterpret_cast<LPWSTR>(&msg_buf), 0, NULL);
 	std::cout << msg;
 	std::wcout << L" : ERROR : " << reinterpret_cast<WCHAR*>(&msg_buf);
-	while (true);
+	//while (true);
 	LocalFree(msg_buf);
 }
 
 LRESULT CALLBACK WndProc(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lParam);
+INT_PTR CALLBACK Dialog_Proc(HWND hDlg, UINT iMsg, WPARAM wParam, LPARAM lParam);
 
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, 
 					LPSTR lpszCmdParam, int nCmdShow)
@@ -135,7 +139,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 	ShowWindow(hWnd, nCmdShow);
 	UpdateWindow(hWnd);
 
-	player[0].x = 3; player[0].y = 3; player[0].wParam = 0;
+	player[0].x = 0; player[0].y = 0; player[0].wParam = 0;
 	buf = player[0];
 
 	std::wcout.imbue(std::locale("korean"));
@@ -146,11 +150,19 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 	SOCKADDR_IN server_addr;
 	server_addr.sin_family = AF_INET;
 	server_addr.sin_port = htons(SERVER_PORT);
-	inet_pton(AF_INET, SERVER_ADDR, &server_addr.sin_addr);
+	if (IP_addr.empty()) { 
+		inet_pton(AF_INET, SERVER_ADDR, &server_addr.sin_addr); 
+	}
+	else {
+		//inet_pton(AF_INET, SERVER_ADDR, &server_addr.sin_addr);
+		inet_pton(AF_INET, const_cast<char*>(IP_addr.c_str()), &server_addr.sin_addr);
+	}
 
-	connect(server_sock, reinterpret_cast<sockaddr*>(&server_addr), sizeof(server_addr));
+	if (connect(server_sock, reinterpret_cast<sockaddr*>(&server_addr), sizeof(server_addr)) != 0) {
+		print_error("connect", WSAGetLastError());
+	}
 
-	while (GetMessage(&Message, 0, 0, 0)) {\
+	while (GetMessage(&Message, 0, 0, 0)) {
 		TranslateMessage(&Message);
 		DispatchMessage(&Message);
 		
@@ -179,10 +191,12 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 	PAINTSTRUCT ps;
 	HDC hDC = GetDC(hWnd);
 	HBITMAP hBitmap;
+	std::string child = "IP Input";
 	//--- 메시지 처리하기
 
 	switch (uMsg) {
 	case WM_CREATE:
+		DialogBox(g_hInst, MAKEINTRESOURCE(IDD_DIALOG1), hWnd, Dialog_Proc);
 		break;
 	case WM_KEYDOWN:
 		//Move(&player[0].x, &player[0].y, wParam);
@@ -205,4 +219,32 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 	
 	return DefWindowProc(hWnd, uMsg, wParam, lParam);
 	//--- 위의 세 메시지 외의 나머지 메시지는 OS로
+}
+
+INT_PTR CALLBACK Dialog_Proc(HWND hDlg, UINT iMsg, WPARAM wParam, LPARAM lParam)
+{
+	static TCHAR editText[20];
+	TCHAR resultText[20] = L"127.0.0.1";
+	std::wstring mem;
+
+	switch (iMsg) {
+	case WM_INITDIALOG:
+		SetDlgItemText(hDlg, IDC_EDIT1, resultText);		SetDlgItemText(hDlg, IDC_EDIT2, resultText);
+		break;
+	case WM_COMMAND:
+		switch (LOWORD(wParam)) {
+		case IDOK: //--- 버튼
+			GetDlgItemText(hDlg, IDC_EDIT1, editText, 100);
+			SetDlgItemText(hDlg, IDC_EDIT2, editText);			mem = (&editText[0]);			IP_addr.assign(mem.begin(), mem.end());
+			break;
+		case IDCANCEL: //--- 버튼			IP_addr.assign(mem.begin(), mem.end());
+			EndDialog(hDlg, 0);
+			break;
+		}
+		break;
+	case WM_CLOSE:
+		EndDialog(hDlg, 0);
+		break;
+	}
+	return 0;
 }

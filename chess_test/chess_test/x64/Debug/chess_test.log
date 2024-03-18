@@ -1,9 +1,43 @@
 ﻿  main.cpp
-E:\College\OneDrive\7th\겜서버\chess_test\chess_test\main.cpp(95,21): warning C4311: 'reinterpret_cast': 'WPARAM *'에서 'int'(으)로 포인터가 잘립니다.
-E:\College\OneDrive\7th\겜서버\chess_test\chess_test\main.cpp(95,21): warning C4302: 'reinterpret_cast': 'WPARAM *'에서 'int'(으)로 잘립니다.
-E:\College\OneDrive\7th\겜서버\chess_test\chess_test\main.cpp(174,16): warning C4244: 'return': 'WPARAM'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-E:\College\OneDrive\7th\겜서버\chess_test\chess_test\main.cpp(189,16): warning C4244: '=': 'WPARAM'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-E:\College\OneDrive\7th\겜서버\chess_test\chess_test\main.cpp(181,10): warning C4101: 'hBitmap' :참조되지 않은 지역 변수입니다.
-  chess_test.vcxproj -> E:\College\OneDrive\7th\겜서버\chess_test\x64\Debug\chess_test.exe
+E:\College\OneDrive\7th\겜서버\ServerProgarm\chess_test\chess_test\main.cpp(98,21): warning C4311: 'reinterpret_cast': 'WPARAM *'에서 'int'(으)로 포인터가 잘립니다.
+E:\College\OneDrive\7th\겜서버\ServerProgarm\chess_test\chess_test\main.cpp(98,21): warning C4302: 'reinterpret_cast': 'WPARAM *'에서 'int'(으)로 잘립니다.
+E:\College\OneDrive\7th\겜서버\ServerProgarm\chess_test\chess_test\main.cpp(186,16): warning C4244: 'return': 'WPARAM'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+E:\College\OneDrive\7th\겜서버\ServerProgarm\chess_test\chess_test\main.cpp(203,16): warning C4244: '=': 'WPARAM'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+E:\College\OneDrive\7th\겜서버\ServerProgarm\chess_test\chess_test\main.cpp(193,10): warning C4101: 'hBitmap' :참조되지 않은 지역 변수입니다.
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.38.33130\include\xstring(2749,53): warning C4244: '인수': 'wchar_t'에서 'const _Elem'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.38.33130\include\xstring(2749,53): warning C4244:         with
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.38.33130\include\xstring(2749,53): warning C4244:         [
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.38.33130\include\xstring(2749,53): warning C4244:             _Elem=char
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.38.33130\include\xstring(2749,53): warning C4244:         ]
+  (소스 파일 'main.cpp'을(를) 컴파일하는 중)
+  C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.38.33130\include\xstring(2749,53):
+  템플릿 인스턴스화 컨텍스트(가장 오래된 인스턴스화 컨텍스트)가
+  	E:\College\OneDrive\7th\겜서버\ServerProgarm\chess_test\chess_test\main.cpp(238,82):
+  	컴파일되는 함수 템플릿 인스턴스화 'std::basic_string<char,std::char_traits<char>,std::allocator<char>> &std::basic_string<char,std::char_traits<char>,std::allocator<char>>::assign<std::_String_iterator<std::_String_val<std::_Simple_types<_Elem>>>,0>(const _Iter,const _Iter)'에 대한 참조를 확인하세요.
+          with
+          [
+              _Elem=wchar_t,
+              _Iter=std::_String_iterator<std::_String_val<std::_Simple_types<wchar_t>>>
+          ]
+  		E:\College\OneDrive\7th\겜서버\ServerProgarm\chess_test\chess_test\main.cpp(238,89):
+  		'Dialog_Proc'에서 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>::assign'에 대한 첫 번째 참조를 확인하세요.
+  	C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.38.33130\include\xstring(3424,32):
+  	컴파일되는 함수 템플릿 인스턴스화 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>::basic_string<wchar_t*,0>(_Iter,_Iter,const _Alloc &)'에 대한 참조를 확인하세요.
+          with
+          [
+              _Iter=wchar_t *,
+              _Alloc=std::allocator<char>
+          ]
+  	C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.38.33130\include\xstring(2590,17):
+  	컴파일되는 함수 템플릿 인스턴스화 'void std::basic_string<char,std::char_traits<char>,std::allocator<char>>::_Construct_from_iter<wchar_t*,wchar_t*,_Size_type>(_Iter,const _Sent,_Size)'에 대한 참조를 확인하세요.
+          with
+          [
+              _Size_type=unsigned __int64,
+              _Iter=wchar_t *,
+              _Sent=wchar_t *,
+              _Size=unsigned __int64
+          ]
+  
+  chess_test.vcxproj -> E:\College\OneDrive\7th\겜서버\ServerProgarm\chess_test\x64\Debug\chess_test.exe
   'pwsh.exe'은(는) 내부 또는 외부 명령, 실행할 수 있는 프로그램, 또는
   배치 파일이 아닙니다.

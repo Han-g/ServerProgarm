@@ -19,7 +19,7 @@ void print_error(const char* msg, int err_no) {
 		MAKELANGID(LANG_NEPALI, SUBLANG_DEFAULT), reinterpret_cast<LPWSTR>(&msg_buf), 0, NULL);
 	std::cout << msg;
 	std::wcout << L" : ERROR : " << reinterpret_cast<WCHAR*>(&msg_buf);
-	while (true);
+	//while (true);
 	LocalFree(msg_buf);
 }
 
@@ -71,7 +71,7 @@ int main()
 		DWORD recv_size; DWORD recv_flag = 0;
 
 		int res = WSARecv(client_sock, wsabuf, 1, &recv_size, &recv_flag, NULL, NULL);
-		std::cout << buf.x << ", " << buf.y << ", " << buf.wParam << std::endl;
+		//std::cout << "A: " << buf.x << ", " << buf.y << ", " << buf.wParam << std::endl;
 		if (res != 0) { print_error("WSARecv", WSAGetLastError()); }
 		//else if (res == 0) { break; }
 
@@ -80,7 +80,7 @@ int main()
 		DWORD sent_size;
 		wsabuf[0].len = sizeof(Data) + 1;
 		WSASend(client_sock, wsabuf, 1, &sent_size, 0, NULL, NULL);
-		std::cout << buf.x << ", " << buf.y << ", " << buf.wParam << std::endl;
+		//std::cout << "B: " << buf.x << ", " << buf.y << ", " << buf.wParam << std::endl;
 	}
 
 	closesocket(server_sock);
